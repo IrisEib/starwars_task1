@@ -1,4 +1,4 @@
-<div class="container">
+<div class="col-md-6 offset-md-3">
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text">Enter a plot title:</span>
@@ -19,11 +19,13 @@
 
   <ejs-multiselect *ngIf="people" #local [dataSource]='people | async' [fields]='peopleFields' [placeholder]='peoplePlaceholder'></ejs-multiselect>
 
-  <p>Choose Planets:<p>
+  <ejs-multiselect *ngIf="planets" #local [dataSource]='planets | async' [fields]='planetsFields' [placeholder]='planetsPlaceholder'></ejs-multiselect>
 
-  <p>Choose Vehicles:<p>
+  <ejs-multiselect *ngIf="species" #local [dataSource]='species | async' [fields]='speciesFields' [placeholder]='speciesPlaceholder'></ejs-multiselect>
 
-  <p>Choose Starships:<p>
+  <ejs-multiselect *ngIf="starships" #local [dataSource]='starships | async' [fields]='starshipsFields' [placeholder]='starshipsPlaceholder'></ejs-multiselect>
+
+  <ejs-multiselect *ngIf="vehicles" #local [dataSource]='vehicles | async' [fields]='vehiclesFields' [placeholder]='vehiclesPlaceholder'></ejs-multiselect>
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
