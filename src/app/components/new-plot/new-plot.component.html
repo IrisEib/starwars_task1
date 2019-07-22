@@ -1,37 +1,26 @@
 <div class="col-md-6 offset-md-3">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Enter a plot title:</span>
+  <div class="card">
+    <div class="card-header">
+      <h1>Create a new StartWars Plot!</h1>
     </div>
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-
-  <!--
-  <div class="col">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let p of films | async"> {{p.title}}</li>
-    </ul>
-    <!-- <button class="btn btn-primary"> Add a question</button> -->
-    <!-- <app-question-list></app-question-list>
-  </div>
-  -->
-  <ejs-multiselect *ngIf="films" #local [dataSource]='films | async' [fields]='filmFields' [placeholder]='filmPlaceholder'></ejs-multiselect>
-
-  <ejs-multiselect *ngIf="people" #local [dataSource]='people | async' [fields]='peopleFields' [placeholder]='peoplePlaceholder'></ejs-multiselect>
-
-  <ejs-multiselect *ngIf="planets" #local [dataSource]='planets | async' [fields]='planetsFields' [placeholder]='planetsPlaceholder'></ejs-multiselect>
-
-  <ejs-multiselect *ngIf="species" #local [dataSource]='species | async' [fields]='speciesFields' [placeholder]='speciesPlaceholder'></ejs-multiselect>
-
-  <ejs-multiselect *ngIf="starships" #local [dataSource]='starships | async' [fields]='starshipsFields' [placeholder]='starshipsPlaceholder'></ejs-multiselect>
-
-  <ejs-multiselect *ngIf="vehicles" #local [dataSource]='vehicles | async' [fields]='vehiclesFields' [placeholder]='vehiclesPlaceholder'></ejs-multiselect>
-
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Enter a Plot describtion:</span>
+    <div class="card-body">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <h2 class="input-group-text">Enter a plot title:</h2>
+        </div>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <ejs-multiselect *ngIf="films" #filmId [dataSource]='films | async' [fields]='filmFields' [placeholder]='filmPlaceholder' ></ejs-multiselect>
+      <ejs-multiselect *ngIf="people" #peopleId [dataSource]='people' [fields]='peopleFields' [placeholder]='peoplePlaceholder'></ejs-multiselect>
+      <ejs-multiselect *ngIf="planets" #planetsId [dataSource]='planets' [fields]='planetsFields' [placeholder]='planetsPlaceholder'></ejs-multiselect>
+      <ejs-multiselect *ngIf="starships" #starshipId [dataSource]='starships' [fields]='starshipsFields' [placeholder]='starshipsPlaceholder'></ejs-multiselect>
+      <div class="input-group mb-3 padding-top">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Enter a Plot describtion:</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
     </div>
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
   </div>
 </div>
 

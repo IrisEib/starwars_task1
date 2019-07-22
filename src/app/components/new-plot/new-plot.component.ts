@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
 import {Films} from '../../entities/classes/films';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import {FilmsService} from '../../services/films.service';
 import {People} from '../../entities/classes/people';
-import {PeopleService} from '../../services/people.service';
 import {Planets} from '../../entities/classes/planets';
-import {Species} from '../../entities/classes/species';
 import {Starships} from '../../entities/classes/starships';
 import {DataService} from '../../services/data.service';
-import {Vehicles} from '../../entities/classes/vehicles';
+
 
 @Component({
   selector: 'app-new-plot',
   templateUrl: './new-plot.component.html',
   styleUrls: ['./new-plot.component.css'],
+  providers: []
 })
 export class NewPlotComponent implements OnInit {
+
+  results: Object;
+
   public filmFields: object = { text: 'title', value: 'episode_id' };
   public filmPlaceholder = 'Select movies';
 
@@ -26,38 +27,59 @@ export class NewPlotComponent implements OnInit {
   public planetsFields: object = { text: 'name' };
   public planetsPlaceholder = 'Select planets';
 
-  public speciesFields: object = { text: 'name' };
-  public speciesPlaceholder = 'Select species';
-
   public starshipsFields: object = { text: 'name' };
   public starshipsPlaceholder = 'Select starships';
 
-  public vehiclesFields: object = { text: 'name' };
-  public vehiclesPlaceholder = 'Select vehicles';
-
   constructor(private filmsService: FilmsService,
-              private peopleService: PeopleService,
-              private dataService: DataService) { }
+              private dataService: DataService) {
+  }
 
   films: Observable<Films[]>;
-  people: Observable<People[]>;
-  planets: Observable<Planets[]>;
-  species: Observable<Species[]>;
-  starships: Observable<Starships[]>;
-  vehicles: Observable<Vehicles[]>;
+  people: People[] = [];
+  planets: Planets[] = [];
+  starships: Starships[] = [];
 
   ngOnInit() {
     this.films = this.filmsService.getFilms();
-    this.people = this.peopleService.getPeople();
-    this.planets = this.dataService.getPlanets();
-    this.species = this.dataService.getSpecies();
-    this.starships = this.dataService.getStarships();
-    this.vehicles = this.dataService.getVehicles();
+    let peopleUrl = "https://swapi.co/api/people/?page=1";
+    this.getPeople(peopleUrl);
+    let planetsUrl = "https://swapi.co/api/planets/?page=1";
+    this.getPlanets(planetsUrl);
+    let starshipsUrl = "https://swapi.co/api/starships/?page=1";
+    this.getStarships(starshipsUrl);
   }
 
-  onSubmit(form: NgForm): void {
-    console.log(form.value.name);
+  getPlanets(nextUrl){
+    if(nextUrl){
+      this.dataService.getPlanets(nextUrl).subscribe(data => {
+        for (const result of data["results"]) {
+          this.planets.push(result);
+        }
+        this.getPlanets(data["next"]);
+      })
+    }
   }
 
+  getPeople(nextUrl){
+    if(nextUrl){
+      this.dataService.getPeople(nextUrl).subscribe(data => {
+        for (const result of data["results"]) {
+          this.people.push(result);
+        }
+        this.getPeople(data["next"]);
+      })
+    }
+  }
+
+  getStarships(nextUrl){
+    if(nextUrl){
+      this.dataService.getStarships(nextUrl).subscribe(data => {
+        for (const result of data["results"]) {
+          this.starships.push(result);
+        }
+        this.getStarships(data["next"]);
+      })
+    }
+  }
 
 }

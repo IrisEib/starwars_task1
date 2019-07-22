@@ -3,6 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {ajax} from 'rxjs/ajax';
+import {Planets} from '../entities/classes/planets';
+import {People} from '../entities/classes/people';
+import {Starships} from '../entities/classes/starships';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +14,19 @@ export class DataService {
 
   constructor( private http: HttpClient) {}
 
-  getPlanets(): Observable<any> {
-    return this.http.get(`https://swapi.co/api/planets/`).pipe(
-      map((data: any) => data.results));
+  getPeople(pageUrl = "https://swapi.co/api/people/?page=1"): Observable<People[]>{
+    return this.http.get(pageUrl).pipe(
+      map((data: any) => data));
   }
 
-  getSpecies(): Observable<any> {
-    return this.http.get(`https://swapi.co/api/species/`).pipe(
-      map((data: any) => data.results));
+  getPlanets(pageUrl = "https://swapi.co/api/planets/?page=1"): Observable<Planets[]>{
+    return this.http.get(pageUrl).pipe(
+      map((data: any) => data));
   }
 
-  getStarships(): Observable<any> {
-    return this.http.get(`https://swapi.co/api/starships/`).pipe(
-      map((data: any) => data.results));
-  }
-
-  getVehicles(): Observable<any> {
-    return this.http.get(`https://swapi.co/api/vehicles/`).pipe(
-      map((data: any) => data.results));
+  getStarships(pageUrl = "https://swapi.co/api/starships/?page=1"): Observable<Starships[]>{
+    return this.http.get(pageUrl).pipe(
+      map((data: any) => data));
   }
 
   getPeopleByCutom(url: string): Observable<any> {

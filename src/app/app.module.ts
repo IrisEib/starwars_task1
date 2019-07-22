@@ -12,7 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    NewPlotComponent
+    NewPlotComponent,
   ],
   imports: [
     BrowserModule,
